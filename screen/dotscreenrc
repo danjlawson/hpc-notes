@@ -1,0 +1,54 @@
+## .screenrc setup
+## Basic usage:
+# Copy this file to ~/.screenrc
+
+## Usage from bash:
+## Type `screen` to create a screen session.
+## Type `screen -r` to rejoin a screen session.
+## Type `screen -rd` if it won't let you because you forgot to detach it first.
+## Within screen, type `exit` to close the current window. You can close all windows to exit screen.
+
+## Key commands when using this setup:
+# Control-b d: detach from screen. Then type `exit` to log off.
+# Control-b <number>: switch window.
+# Control-b Control-b: switch to last window (like alt-tab in windows)
+# Control-b c: Create a new window.
+# Control-b ?: show help.
+# Control-b [: Enter copy mode. This lets you view your entire screen output history. Scroll around; press space to start a copy and space again to end it.
+# Control-b ]: Paste copied text.
+
+
+## Start:
+
+# detach on hangup
+autodetach on # if your ssh session closes, automatically detach screen from it.
+
+# don't display the copyright page
+startup_message off
+escape ^Bb # Type Control-b to access screen commands (instead of the default Control-a, which messes with emacs)
+
+## How to change window. The default is to type Control-b <number> where <number> will be listed at the bottom of the terminal window.
+## These are options to change window with different keys.
+#bindkey "^1;5Dd" prev  # change window with ctrl-left
+#bindkey "^1;5Cc" next  # change window with ctrl-right
+
+## I don't like the "bell" (screen flash)
+#change visual bell
+vbell_msg ""
+vbellwait 0.5
+
+## This ensures we always get something helpful displayed at the bottom. You will need to read the docs to understand it!
+caption always "%?%{ Wk}%-Lw%?%{Rk}%n*%f %t%?(%u)%?%?%{Wk}%+Lw%? %{Rk}%=%d-%M-%Y %{rk}%c"
+#hardstatus alwayslastline
+#hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
+
+## On first creation we get three screens
+# Default screens
+screen -t shell1	1
+screen -t shell2	2
+screen -t shell3	3	
+select 1
+
+## Make the numbers sane. Note more than ten windows makes selecting them annoying.
+bind c screen 1 # Window numbering starts at 1, not 0.
+bind 0 select 10
