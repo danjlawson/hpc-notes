@@ -1,0 +1,6 @@
+seed=as.numeric(commandArgs(TRUE)[1])
+set.seed(seed)
+test=runif(1)
+print(paste("seed was",seed,"; test was",test))
+cat(paste("a message that goes to standard error:",seed,"\n"), file = stderr())
+write.table(test,file=paste0("test",seed,".rout"))
