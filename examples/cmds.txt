@@ -1,0 +1,5 @@
+echo "1" >> out1.txt
+echo "2" >> out2.txt
+echo "3" >> out3.txt
+echo "4" >> out4.txt
+echo "5" >> out5.txt

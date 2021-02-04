@@ -1,0 +1,11 @@
+#!/bin/bash -login
+#PBS -l walltime=1:00:00,nodes=1:ppn=1
+#PBS -t 1-5
+cd $PBS_O_WORKDIR
+echo "This is job number $PBS_JOBID in $PBS_O_WORKDIR running command number $PBS_ARRAYID on node $PBS_NODEFILE" &>> /newhome/madjl/log/mytest.Tj5UE3/$PBS_JOBID.out
+date  &>> /newhome/madjl/log/mytest.Tj5UE3/$PBS_JOBID.out
+cmd=`head -n $PBS_ARRAYID cmds.txt | tail -n 1`
+echo "Running: $cmd"  &>> /newhome/madjl/log/mytest.Tj5UE3/$PBS_JOBID.out
+eval $cmd  &>> /newhome/madjl/log/mytest.Tj5UE3/$PBS_JOBID.out
+echo "Completed..."  &>> /newhome/madjl/log/mytest.Tj5UE3/$PBS_JOBID.out
+date  &>> /newhome/madjl/log/mytest.Tj5UE3/$PBS_JOBID.out

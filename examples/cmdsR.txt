@@ -1,0 +1,3 @@
+Rscript test.R 1
+Rscript test.R 2
+Rscript test.R 3
