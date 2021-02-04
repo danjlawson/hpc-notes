@@ -26,6 +26,7 @@ mkdir -p ~/bin # Make the bin directory if it doesn't exist
 cd ../pbs
 cp qsub_array.sh ~/bin/
 cp qtop.sh ~/bin
+cp qstop.sh ~/bin
 echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc ## Add to your PATH
 source ~/.bashrc # Reload it to add the path
 ```
@@ -61,4 +62,9 @@ qsub_array.sh -f cmdsR.txt -w 1
 * Now we can examine the queue for your own jobs with:
 ```{sh}
 qtop.sh
+```
+
+* You can kill all of your jobs with `qstop.sh $USER` or just the one called cmds.txt with:
+```{sh}
+qstop.sh cmds.txt
 ```
