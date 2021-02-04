@@ -48,7 +48,7 @@ if [ ! -f $cmdfile ]; then
     exit 1
 fi
 ncmds=`cat $cmdfile | wc -l`
-log=`mktemp -d $HOME/log/mytest.XXXXXX`
+log=`mktemp -d $HOME/log/${cmdfile}.XXXXXX`
 echo "Making qsub script $pbsfile from $cmdfile with $ncmds commands"
 echo "#!/bin/bash -login" > $pbsfile
 echo "#PBS -l walltime=$walltime:00:00,nodes=$nodes:ppn=$ppnode"  >> $pbsfile
