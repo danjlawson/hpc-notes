@@ -1,0 +1,2 @@
+#!/bin/bash
+srun --nodes=1 --ntasks-per-node=8 --time=119:59:00 --pty bash -i
