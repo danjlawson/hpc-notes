@@ -4,7 +4,7 @@ To use the **GPU** with Tensorflow, everything is very fussy. But it can be made
 
 First follow the instructions for logging on to BC4 GPU node, which from bash are:
 ```{bash}
-ssh -X madjl@bc4gpulogin.acrc.bris.ac.uk
+ssh -X <username>@bc4gpulogin.acrc.bris.ac.uk
 ```
 This enables you to test interactively.
 
