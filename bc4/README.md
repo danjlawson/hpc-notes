@@ -53,7 +53,8 @@ conda install tensorflow-gpu keras pandas scikit-learn
 ```
 and use conda and python as intended. To test this, try:
 ```{bash}
-cd hpc-notes/bc4/ # NB you may have put this somewhere else...
+git clone https://github.com/danjlawson/hpc-notes.git
+cd hpc-notes/bc4/
 python gputest.py
 ```
 which should produce output like the following:
