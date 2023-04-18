@@ -51,6 +51,8 @@ ncmds=`cat $cmdfile | wc -l`
 log=`mktemp -d $HOME/log/${cmdfile}.XXXXXX`
 echo "Making sbatch script $slurmfile from $cmdfile with $ncmds commands"
 echo "#!/bin/bash -login" > $slurmfile
+echo "#SBATCH --account=MATH027744" >> $slurmfile
+echo "#SBATCH --time=$walltime:00:00"  >> $slurmfile
 echo "#SBATCH --time=$walltime:00:00"  >> $slurmfile
 echo "#SBATCH --array=1-$ncmds" >> $slurmfile
 echo "#SBATCH --nodes=$nodes" >> $slurmfile
