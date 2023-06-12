@@ -48,7 +48,8 @@ if [ ! -f $cmdfile ]; then
     exit 1
 fi
 ncmds=`cat $cmdfile | wc -l`
-log=`mktemp -d $HOME/log/${cmdfile}.XXXXXX`
+cmdfilebase=`basename $cmdfile`
+log=`mktemp -d $HOME/log/${cmdfilebase}.XXXXXX`
 echo "Making sbatch script $slurmfile from $cmdfile with $ncmds commands"
 echo "#!/bin/bash -login" > $slurmfile
 echo "#SBATCH --account=MATH027744" >> $slurmfile
