@@ -5,6 +5,7 @@ function show_help {
     echo "  Submit commands to a slurm/sbatch system using an array job, where <cmdfile> is a file containing a list of commands to execute, one per line."
     echo "OPTIONS:"
     echo "  -f <val>: The name of the command file to submit. REQUIRED."
+    echo "  -q <val>: The name of the queue to use. Options are cpu (default), gpu, or veryshort. If veryshort is used, the walltime is set to 6:00:00."
     echo "  -n <val>: Set the number of processes per command in the sbatch script. (Default: 1)"
     echo "  -w <val>: Set the walltime requested. (Default: 120, measured in hours)"
     echo "  -P <val>: Set the number of processes per node per command in the sbatch script. (Default: 1)"
@@ -14,17 +15,21 @@ function show_help {
 }
 
 cmdfile=""
+partition="cpu"
 walltime=120  #hours
 nodes=1
 ppnode=1
 pretend=0
-while getopts "h?vpP:n:w:f:" opt; do
+while getopts "h?vpP:n:q:w:f:" opt; do
     case "$opt" in
     f) cmdfile=$OPTARG
 	;;
     w) walltime=$OPTARG
         ;;
     n) nodes=$OPTARG
+        ;;
+    q) partition=$OPTARG; 
+	    if [ "$partition" = "veryshort"] ; then walltime=6; fi
         ;;
     P) ppnode=$OPTARG
         ;;
@@ -54,7 +59,7 @@ echo "Making sbatch script $slurmfile from $cmdfile with $ncmds commands"
 echo "#!/bin/bash -login" > $slurmfile
 echo "#SBATCH --account=MATH027744" >> $slurmfile
 echo "#SBATCH --time=$walltime:00:00"  >> $slurmfile
-echo "#SBATCH --time=$walltime:00:00"  >> $slurmfile
+echo "#SBATCH --partition=$partition" >>  $slurmfile
 echo "#SBATCH --array=1-$ncmds" >> $slurmfile
 echo "#SBATCH --nodes=$nodes" >> $slurmfile
 echo "#SBATCH --cpus-per-task=$ppnode" >> $slurmfile
